@@ -26,7 +26,8 @@ mkdir -p "$tf_install_dir"
 
 if [ -z "$tf_version" ]; then
     [ -e "$tf_link_name" ] && active=$(readlink "$tf_link_name" | xargs basename)
-    for i in "$tf_install_dir"/*; do
+    cd "$tf_install_dir"
+    for i in *; do
         if [ "$i" = "$active" ]; then
             printf "%s*\n" "$i"
         else
@@ -40,7 +41,7 @@ else
         curl -sS --location --fail --output /tmp/tf.zip "$dl"
         unzip /tmp/tf.zip -d /tmp >/dev/null
         mv /tmp/terraform "${tf_install_dir}/${tf_version}"
-        rm /tmp/tf.zip
+        rm -f /tmp/tf.zip
     fi
     mkdir -p "$HOME/bin"
     ln -sf "${tf_install_dir}/${tf_version}" "$tf_link_name"
