@@ -1,0 +1,54 @@
+         `~* chtf *~`
+
+  chtf is a simple shell script
+  that manages terraform versions.
+
+  i made it because the existing
+  solutions were way too big for
+  what i thought was a simple problem.
+
+
+      ??? deps+install ???
+
+  to install chtf, just put it anywhere in
+  your $PATH. i put it in ~/bin personally.
+
+  you'll need to install these deps:
+    - curl
+    - unzip
+
+  you'll also need ~/bin in your $PATH near
+  the beginning somewhere, since chtf relies
+  on symlinking ~/bin/terraform to the proper
+  version.
+
+  most distros will have everything you need
+  out of the box.
+
+
+       !!! demo !!!
+
+  here's a full demo of chtf's capabilities:
+
+  # list versions (* represents active)
+
+    $ chtf
+    0.11.1
+    0.12.1*
+
+  # switch to a different installed version
+    $ chtf 0.11.1
+    $ chtf
+    0.11.1*
+    0.12.1
+    $ terraform version
+    Terraform v0.11.1
+
+  # download a new version and make it active
+
+    $ chtf 1.2.5
+    terraform version not found
+    downloading https://releases.hashicorp.com/terraform/1.2.5/terraform_1.2.5_linux_amd64.zip
+    $ terraform version
+    Terraform v1.2.5
+    on linux_amd64
