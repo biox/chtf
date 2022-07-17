@@ -26,7 +26,7 @@ mkdir -p "$tf_install_dir"
 
 if [ -z "$tf_version" ]; then
     [ -e "$tf_link_name" ] && active=$(readlink "$tf_link_name" | xargs basename)
-    for i in $(ls "$tf_install_dir"); do
+    for i in "$tf_install_dir"/*; do
         if [ "$i" = "$active" ]; then
             printf "%s*\n" "$i"
         else
@@ -37,7 +37,7 @@ else
     if [ ! -f "${tf_install_dir}/${tf_version}" ]; then
         dl="https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_${os}_amd64.zip"
         printf "terraform version not found\ndownloading %s\n" "$dl"
-        curl -sS --location --fail --output /tmp/tf.zip "$dl" 2>&1 >/dev/null
+        curl -sS --location --fail --output /tmp/tf.zip "$dl"
         unzip /tmp/tf.zip -d /tmp >/dev/null
         mv /tmp/terraform "${tf_install_dir}/${tf_version}"
         rm /tmp/tf.zip
