@@ -29,9 +29,9 @@ if [ -z "$tf_version" ]; then
     cd "$tf_install_dir"
     for i in *; do
         if [ "$i" = "$active" ]; then
-            printf "%s*\n" "$i"
+            printf " * %s\n" "$i"
         else
-            printf "%s\n" "$i"
+            printf "   %s\n" "$i"
         fi
     done
 else
